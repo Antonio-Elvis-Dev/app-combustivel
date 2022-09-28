@@ -11,7 +11,14 @@ import {
   Modal,
 } from "react-native";
 
+import Resultado from "./src/pages/Resultado";
+
 export default function App() {
+
+const [modalStatus, setModalStatus] = useState(false)
+
+
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.areaTitulo}>
@@ -31,7 +38,7 @@ export default function App() {
           style={styles.textoInput}
           placeholder="Ex: 6.10"
         />
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity onPress={()=>setModalStatus(true)} style={styles.button}>
           <Text
             style={[styles.textoInfo, { fontSize: 20, fontWeight: "bold" }]}
           >
@@ -39,8 +46,11 @@ export default function App() {
           </Text>
         </TouchableOpacity>
       </View>
-      <Modal>
+      <Modal visible={modalStatus} animationType={"slide"}>
+        <Resultado 
         
+        voltar = {()=> setModalStatus(false)}
+        />
       </Modal>
     </SafeAreaView>
   );
