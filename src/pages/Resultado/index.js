@@ -9,13 +9,6 @@ import {
 } from "react-native";
 
 
-
-
-
-
-
-
-
 export default function Resultado(props) {
   return (
     <SafeAreaView style={styles.container}>
@@ -29,8 +22,8 @@ export default function Resultado(props) {
         <Text style={styles.resultado}>Gasolina: 6.10</Text>
       </View>
       <View style={styles.areaButton}>
-        <TouchableOpacity style={styles.button}>
-          <Text onPress={props.voltar} style={styles.textoButton}>Calcular Novamente</Text>
+        <TouchableOpacity onPress={props.voltar} style={styles.button}>
+          <Text  style={styles.textoButton}>Calcular Novamente</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -40,6 +33,7 @@ export default function Resultado(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent:"center",
     backgroundColor: "#121212",
   },
   areaTitulo: {
@@ -48,32 +42,40 @@ const styles = StyleSheet.create({
   titulo:{
     color:"#669200",
     fontSize:25,
-    fontWeight:'bold'
+    fontWeight:'bold',
+    marginTop:20,
+    marginBottom:30
   },
   areaResultado: {
     alignItems: "center",
   },
   info: {
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 20,
     color: "#fff",
+    marginBottom:10
   },
   resultado:{
     color: "#fff",
-
+    fontSize:18
   },
   areaButton: {
     alignItems: "center",
+    marginTop:30
   },
   button: {
     borderWidth: 2,
     borderColor: "#f50000",
-    padding:10,
-    borderRadius:8
+    padding:15,
+    borderRadius:8,
+    width:'70%',
+    alignItems:"center",
+
 
   },
   textoButton:{
     color: "#f50000",
-
+    fontWeight:"bold",
+    fontSize:18
   }
 });
