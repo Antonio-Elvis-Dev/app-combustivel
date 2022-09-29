@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+
 import {
   View,
   Text,
@@ -9,24 +10,25 @@ import {
 } from "react-native";
 
 
+
 export default function Resultado(props) {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.areaTitulo}>
         <Image source={require("../../assets/gas.png")} />
         <Text style={styles.titulo}>Compensa usar Álcool</Text>
       </View>
       <View style={styles.areaResultado}>
         <Text style={styles.info}>Com os Preços:</Text>
-        <Text style={styles.resultado}>Álcool: 4.35</Text>
-        <Text style={styles.resultado}>Gasolina: 6.10</Text>
+        <Text style={styles.resultado}>Álcool: </Text>
+        <Text style={styles.resultado}>Gasolina:  </Text>
       </View>
       <View style={styles.areaButton}>
         <TouchableOpacity onPress={props.voltar} style={styles.button}>
           <Text  style={styles.textoButton}>Calcular Novamente</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 

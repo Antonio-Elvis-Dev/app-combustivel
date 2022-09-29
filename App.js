@@ -14,10 +14,20 @@ import {
 import Resultado from "./src/pages/Resultado";
 
 export default function App() {
+  const [modalStatus, setModalStatus] = useState(false);
+  const [valorAlcool, setValorAlcool] = useState(0);
+  const [valorGas, setValorGas] = useState(0);
+  const [compensa, setCompensa] = useState("");
 
-const [modalStatus, setModalStatus] = useState(false)
+  function calcular() {
+    var calculo = (parseFloat(valorAlcool).toFixed(2) / parseFloat(valorGas).toFixed(2));
 
+    var teste = calculo <= 0.7 ? "Alcool" : "Gasolina";
 
+    setModalStatus(true);
+    setCompensa(teste);
+    
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -31,14 +41,19 @@ const [modalStatus, setModalStatus] = useState(false)
           keyboardType="numeric"
           style={styles.textoInput}
           placeholder="Ex: 4.35"
+          onChangeText={(valor) => setValorAlcool(valor)}
+          alcool = {valorAlcool}
         />
         <Text style={styles.textoInfo}>Gasolina (preço por Litro):</Text>
         <TextInput
           keyboardType="numeric"
           style={styles.textoInput}
           placeholder="Ex: 6.10"
+          onChangeText={(valor) => setValorGas(valor)}
+          gas = {valorGas}
+
         />
-        <TouchableOpacity onPress={()=>setModalStatus(true)} style={styles.button}>
+        <TouchableOpacity onPress={calcular} style={styles.button}>
           <Text
             style={[styles.textoInfo, { fontSize: 20, fontWeight: "bold" }]}
           >
@@ -48,8 +63,9 @@ const [modalStatus, setModalStatus] = useState(false)
       </View>
       <Modal visible={modalStatus} animationType={"slide"}>
         <Resultado 
+        voltar={() => setModalStatus(false)}
         
-        voltar = {()=> setModalStatus(false)}
+        
         />
       </Modal>
     </SafeAreaView>
