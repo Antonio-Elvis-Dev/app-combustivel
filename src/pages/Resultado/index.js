@@ -9,23 +9,23 @@ import {
   StyleSheet,
 } from "react-native";
 
-
-
 export default function Resultado(props) {
   return (
     <View style={styles.container}>
       <View style={styles.areaTitulo}>
         <Image source={require("../../assets/gas.png")} />
-        <Text style={styles.titulo}>Compensa usar Álcool</Text>
+        <Text style={styles.titulo}>{props.data.melhor}</Text>
       </View>
       <View style={styles.areaResultado}>
         <Text style={styles.info}>Com os Preços:</Text>
-        <Text style={styles.resultado}>Álcool: </Text>
-        <Text style={styles.resultado}>Gasolina:  </Text>
+        <Text style={styles.resultado}>Álcool: {props.data.alcool} </Text>
+        <Text style={styles.resultado}>Gasolina: {props.data.gasolina}</Text>
       </View>
       <View style={styles.areaButton}>
-        <TouchableOpacity onPress={props.voltar} style={styles.button}>
-          <Text  style={styles.textoButton}>Calcular Novamente</Text>
+        <TouchableOpacity onPress={props.voltar} style={styles.button}
+        
+        >
+          <Text style={styles.textoButton}>Calcular Novamente</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -35,18 +35,18 @@ export default function Resultado(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent:"center",
+    justifyContent: "center",
     backgroundColor: "#121212",
   },
   areaTitulo: {
     alignItems: "center",
   },
-  titulo:{
-    color:"#669200",
-    fontSize:25,
-    fontWeight:'bold',
-    marginTop:20,
-    marginBottom:30
+  titulo: {
+    color: "#669200",
+    fontSize: 25,
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 30,
   },
   areaResultado: {
     alignItems: "center",
@@ -55,29 +55,27 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     color: "#fff",
-    marginBottom:10
+    marginBottom: 10,
   },
-  resultado:{
+  resultado: {
     color: "#fff",
-    fontSize:18
+    fontSize: 18,
   },
   areaButton: {
     alignItems: "center",
-    marginTop:30
+    marginTop: 30,
   },
   button: {
     borderWidth: 2,
     borderColor: "#f50000",
-    padding:15,
-    borderRadius:8,
-    width:'70%',
-    alignItems:"center",
-
-
+    padding: 15,
+    borderRadius: 8,
+    width: "70%",
+    alignItems: "center",
   },
-  textoButton:{
+  textoButton: {
     color: "#f50000",
-    fontWeight:"bold",
-    fontSize:18
-  }
+    fontWeight: "bold",
+    fontSize: 18,
+  },
 });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -14,19 +14,41 @@ import {
 import Resultado from "./src/pages/Resultado";
 
 export default function App() {
+  const inputRef = useRef(null);
+
   const [modalStatus, setModalStatus] = useState(false);
-  const [valorAlcool, setValorAlcool] = useState(0);
-  const [valorGas, setValorGas] = useState(0);
+  const [valorAlcool, setValorAlcool] = useState("");
+  const [valorGas, setValorGas] = useState("");
   const [compensa, setCompensa] = useState("");
+  const [valor, setValor] = useState({});
 
-  function calcular() {
-    var calculo = (parseFloat(valorAlcool).toFixed(2) / parseFloat(valorGas).toFixed(2));
+  async function calcular() {
+    var calculo =
+      parseFloat(valorAlcool).toFixed(2) / parseFloat(valorGas).toFixed(2);
 
-    var teste = calculo <= 0.7 ? "Alcool" : "Gasolina";
+    var teste =
+      calculo <= 0.7 ? "Compensa usar Alcool" : "Compensa usar Gasolina";
+    // valor.push(valorAlcool, valorGas);
 
     setModalStatus(true);
-    setCompensa(teste);
-    
+
+    setValor({
+      gasolina: valorGas,
+      alcool: valorAlcool,
+      melhor: teste,
+    });
+    console.log(valor);
+   
+  }
+
+  function limpar() {
+    try {
+      setValorAlcool("");
+      setValorGas("");
+      inputRef.current.focus();
+    } catch (error) {
+      console.log(`Error: ${error}`);
+    }
   }
 
   return (
@@ -42,7 +64,8 @@ export default function App() {
           style={styles.textoInput}
           placeholder="Ex: 4.35"
           onChangeText={(valor) => setValorAlcool(valor)}
-          alcool = {valorAlcool}
+          alcool={valorAlcool}
+          ref={inputRef}
         />
         <Text style={styles.textoInfo}>Gasolina (preço por Litro):</Text>
         <TextInput
@@ -50,8 +73,8 @@ export default function App() {
           style={styles.textoInput}
           placeholder="Ex: 6.10"
           onChangeText={(valor) => setValorGas(valor)}
-          gas = {valorGas}
-
+          gas={valorGas}
+          ref={inputRef}
         />
         <TouchableOpacity onPress={calcular} style={styles.button}>
           <Text
@@ -60,11 +83,19 @@ export default function App() {
             Calcular
           </Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={limpar}
+          style={[styles.button, { backgroundColor: "#c92a03" }]}
+        >
+          <Text
+            style={[styles.textoInfo, { fontSize: 20, fontWeight: "bold" }]}
+          >
+            Limpar
+          </Text>
+        </TouchableOpacity>
       </View>
       <Modal visible={modalStatus} animationType={"slide"}>
-        <Resultado 
-        voltar={() => setModalStatus(false)}
-        
+        <Resultado voltar={() => setModalStatus(false)} data={valor} 
         
         />
       </Modal>
@@ -81,6 +112,7 @@ const styles = StyleSheet.create({
   areaTitulo: {
     alignItems: "center",
     marginBottom: 60,
+    marginTop: 20,
   },
   areaForm: {
     alignItems: "stretch",
