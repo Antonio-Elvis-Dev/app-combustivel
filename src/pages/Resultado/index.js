@@ -20,6 +20,7 @@ export default function Resultado(props) {
         <Text style={styles.info}>Com os Preços:</Text>
         <Text style={styles.resultado}>Álcool: {props.data.alcool} </Text>
         <Text style={styles.resultado}>Gasolina: {props.data.gasolina}</Text>
+        <Text style={styles.resultado}>Porcentagem: {props.data.porcent}%</Text>
       </View>
       <View style={styles.areaButton}>
         <TouchableOpacity onPress={props.voltar} style={styles.button}

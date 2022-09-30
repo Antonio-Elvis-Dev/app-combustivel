@@ -26,29 +26,17 @@ export default function App() {
     var calculo =
       parseFloat(valorAlcool).toFixed(2) / parseFloat(valorGas).toFixed(2);
 
-    var teste =
+    var rentab =
       calculo <= 0.7 ? "Compensa usar Alcool" : "Compensa usar Gasolina";
-    // valor.push(valorAlcool, valorGas);
-
+    var escolha = (calculo * 100).toFixed(1);
     setModalStatus(true);
 
     setValor({
       gasolina: valorGas,
       alcool: valorAlcool,
-      melhor: teste,
+      melhor: rentab,
+      porcent: escolha,
     });
-    console.log(valor);
-   
-  }
-
-  function limpar() {
-    try {
-      setValorAlcool("");
-      setValorGas("");
-      inputRef.current.focus();
-    } catch (error) {
-      console.log(`Error: ${error}`);
-    }
   }
 
   return (
@@ -83,21 +71,9 @@ export default function App() {
             Calcular
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={limpar}
-          style={[styles.button, { backgroundColor: "#c92a03" }]}
-        >
-          <Text
-            style={[styles.textoInfo, { fontSize: 20, fontWeight: "bold" }]}
-          >
-            Limpar
-          </Text>
-        </TouchableOpacity>
       </View>
       <Modal visible={modalStatus} animationType={"slide"}>
-        <Resultado voltar={() => setModalStatus(false)} data={valor} 
-        
-        />
+        <Resultado voltar={() => setModalStatus(false)} data={valor} />
       </Modal>
     </SafeAreaView>
   );
